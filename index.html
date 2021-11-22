@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Program 5 - Create a HTML Table</title>
+    <title>Programming Project 5</title>
+    // @s-username - 2021.11.21
+    // JavaScript I
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,8 +18,8 @@
         <br>
         <p class="display-4 text-muted">Select a major</p>
         <br>
-        <input type="button" value="Business" id="btnBusiness" class="btn btn-primary btn-lg " onclick="CreateTable('BUS')">
-        <input type="button" value="CIT" id="btnCITMajor" class="btn btn-primary btn-lg " onclick="CreateTable('CIT')">
+        <input type="button" value="Business" id="btnBusiness" class="btn btn-primary btn-lg" onclick="CreateTable('BUS')">
+        <input type="button" value="CIT" id="btnCITMajor" class="btn btn-primary btn-lg" onclick="CreateTable('CIT')">
         <hr>
         <div id="tableContainer"></div>
     </div>
@@ -44,20 +46,21 @@
             var data = JSON.parse(request.responseText);
 
             major_items = data.filter(getMajor)
-
             function getMajor(item) {
                 return item.major == major;
             }
 
             if (request.status == 200) {
                 var templateText = document.getElementById('tableTemplate').innerHTML;
-                var compiledTemplateText = Handlebars.compile(templateText);   // get and compile template code
 
-                compiledHtml = compiledTemplateText({ rows: major_items })      // apply data to template
+                var compiledTemplateText = Handlebars.compile(templateText);
+
+                compiledHtml = compiledTemplateText({ rows: major_items })
+
                 document.getElementById('tableContainer').innerHTML = compiledHtml;
             }
             else {
-                document.querySelector('#tableContainer').innerHTML = "There was an error, or menu items not found";
+                document.querySelector('#tableContainer').innerHTML = "There was an error, or file not found";
             }
         }
 
